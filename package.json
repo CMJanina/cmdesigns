@@ -5,7 +5,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chrissxMedia/Designs.git"
+    "url": "https://github.com/chrissxMedia/cmdesigns.git"
   },
   "exports": {
     ".": "./index.ts"
