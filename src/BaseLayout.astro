@@ -39,8 +39,8 @@ const { title, favicon, lang, description, themecolor, fediverseCreator } =
     <slot />
 </MinimalLayout>
 
-<style is:global>
-    body {
+<style is:inline>
+    :where(body) {
         font-family: var(--unifont);
         color: white;
         background-color: black;
