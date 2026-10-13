@@ -1,0 +1,49 @@
+---
+import Favicon from "astro-favicon";
+import MinimalLayout from "./MinimalLayout.astro";
+
+export interface Props {
+    title: string;
+    favicon?: ImageMetadata | string;
+    lang: string;
+    description?: string;
+    themecolor?: string;
+    fediverseCreator?: string;
+}
+
+const { title, favicon, lang, description, themecolor, fediverseCreator } =
+    Astro.props;
+---
+
+<MinimalLayout {title} {lang}>
+    {
+        description && (
+            <meta name="description" content={description} slot="head" />
+        )
+    }
+    {themecolor && <meta name="theme-color" content={themecolor} slot="head" />}
+    {
+        fediverseCreator && (
+            <meta
+                name="fediverse:creator"
+                content={fediverseCreator}
+                slot="head"
+            />
+        )
+    }
+    {favicon && <Favicon src={favicon} slot="head" />}
+    <meta name="generator" content={Astro.generator} slot="head" />
+    <meta name="darkreader-lock" slot="head" />
+    <link rel="stylesheet" href="https://fonts.chrissx.de/" slot="head" />
+    <slot name="head" slot="head" />
+    <slot />
+</MinimalLayout>
+
+<style is:global>
+    body {
+        font-family: var(--unifont);
+        color: white;
+        background-color: black;
+        color-scheme: dark;
+    }
+</style>

@@ -1,0 +1,45 @@
+---
+export interface Props {
+    start: number;
+    end?: number;
+    rightsholder?: string;
+    link?: string;
+    build?: string;
+}
+
+let {
+    start,
+    end = new Date().getFullYear(),
+    rightsholder = "chrissx Media",
+    link,
+    build,
+} = Astro.props;
+
+const years = start == end ? start : start + "-" + end;
+const s = `Copyright &copy; ${years}&nbsp;${rightsholder}`;
+---
+
+<footer>
+    <slot />
+    {build && (link ? <a href={link}>{build}</a> : <span>{build}</span>)}
+    {link ? <a href={link} set:html={s} /> : <span set:html={s} />}
+</footer>
+
+<style>
+    footer {
+        font-family: var(--unifont);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2.5em;
+        margin-top: 1.25em;
+        color: silver;
+    }
+    a,
+    span {
+        color: silver;
+        text-decoration: none;
+        width: max-content;
+        margin: 0 auto;
+    }
+</style>
