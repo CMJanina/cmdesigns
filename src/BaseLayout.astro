@@ -35,15 +35,16 @@ const { title, favicon, lang, description, themecolor, fediverseCreator } =
     <meta name="generator" content={Astro.generator} slot="head" />
     <meta name="darkreader-lock" slot="head" />
     <link rel="stylesheet" href="https://fonts.chrissx.de/" slot="head" />
-    <style is:inline slot="head">
-        /* shortcut: inline CSS skips bundling; restore it once unused layout imports stop leaking styles. */
-        body {
-            font-family: var(--unifont);
-            color: white;
-            background-color: black;
-            color-scheme: dark;
-        }
-    </style>
     <slot name="head" slot="head" />
     <slot />
 </MinimalLayout>
+
+<style is:inline>
+    /* shortcut: inline CSS skips bundling; restore it once unused layout imports stop leaking styles. */
+    body {
+        font-family: var(--unifont);
+        color: white;
+        background-color: black;
+        color-scheme: dark;
+    }
+</style>
