@@ -1,0 +1,34 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"dialog">;
+---
+
+<dialog {...Astro.props}>
+    <slot />
+    {Astro.slots.has("buttons") && <div><slot name="buttons" /></div>}
+</dialog>
+
+<style>
+    dialog {
+        border: 1px solid #333;
+        border-radius: 8px;
+        color: inherit;
+        background: #1a1a1a;
+        padding: 1.2em;
+        max-width: 46ch;
+        line-height: 1.55;
+    }
+    dialog::backdrop {
+        background: rgb(0 0 0 / 0.6);
+    }
+    dialog > :global(h3) {
+        margin: 0 0 0.4em;
+    }
+    div {
+        display: flex;
+        gap: 0.6em;
+        justify-content: flex-end;
+        margin-top: 0.8em;
+    }
+</style>

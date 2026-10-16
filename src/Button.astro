@@ -1,0 +1,62 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = { variant?: "default" | "primary" | "danger" } & (
+    | ({ href: string } & HTMLAttributes<"a">)
+    | ({ href?: undefined } & HTMLAttributes<"button">)
+);
+
+const { variant = "default", ...props } = Astro.props;
+---
+
+{
+    props.href !== undefined ? (
+        <a {...props} data-variant={variant}>
+            <slot />
+        </a>
+    ) : (
+        <button {...props} data-variant={variant}>
+            <slot />
+        </button>
+    )
+}
+
+<style>
+    a,
+    button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45em;
+        padding: 0.5em 1em;
+        border: 0;
+        border-radius: 0.5em;
+        font: inherit;
+        font-family: var(--unifont);
+        line-height: 1.1;
+        white-space: nowrap;
+        text-decoration: none;
+        color: white;
+        background-color: #303030;
+        cursor: pointer;
+    }
+    [data-variant="primary"] {
+        background-color: rgb(var(--cmpurple));
+    }
+    [data-variant="danger"] {
+        background-color: rgb(var(--cmred));
+    }
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    a:hover,
+    button:hover {
+        outline: 1px solid rgb(var(--cmpurple));
+        outline-offset: 1px;
+    }
+    a:focus-visible,
+    button:focus-visible {
+        outline: 2px solid rgb(var(--cmpurple));
+        outline-offset: 2px;
+    }
+</style>

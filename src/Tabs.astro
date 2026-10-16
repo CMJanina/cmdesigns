@@ -1,0 +1,95 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div"> & {
+    id: string;
+    label: string;
+    options: [string, string][];
+    value?: string;
+    name?: string;
+};
+
+const { id, label, options, value, name = id, ...attributes } = Astro.props;
+if (options.length === 0) throw new Error("Tabs requires at least one option.");
+const selected = Math.max(0, options.findIndex(([key]) => key === value));
+---
+
+<div {...attributes} {id} role="radiogroup" aria-label={label} data-cm-tabs>
+    <span aria-hidden="true" style={{ "--count": options.length, "--selected": selected }}></span>
+    {options.map(([value, text], index) => (
+        <>
+            <input id={`${id}-${index}`} type="radio" {name} {value} checked={index === selected} />
+            <label for={`${id}-${index}`}>{text}</label>
+        </>
+    ))}
+</div>
+
+<script>
+    for (const tabs of document.querySelectorAll("[data-cm-tabs]")) {
+        const inputs = Array.from(tabs.querySelectorAll("input"));
+        const thumb = tabs.querySelector("span")!;
+        const update = () =>
+            thumb.style.setProperty("--selected", String(inputs.findIndex((input) => input.checked)));
+        tabs.addEventListener("change", update);
+        tabs.closest("form")?.addEventListener("reset", () => requestAnimationFrame(update));
+        update();
+    }
+</script>
+
+<style>
+    div {
+        display: inline-flex;
+        gap: 3px;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 3px;
+        border-radius: 999px;
+        background: rgb(var(--cmblack));
+        font-family: var(--unifont);
+    }
+    span {
+        position: absolute;
+        top: 3px;
+        bottom: 3px;
+        left: 3px;
+        width: calc((100% - (var(--count) + 1) * 3px) / var(--count));
+        border-radius: 999px;
+        background: #666;
+        transform: translateX(calc(var(--selected) * (100% + 3px)));
+        transition: transform 180ms ease;
+        pointer-events: none;
+    }
+    input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+    }
+    label {
+        position: relative;
+        z-index: 1;
+        flex: 1;
+        min-width: 0;
+        padding: 0.4rem 0;
+        border-radius: 999px;
+        color: #c0c0c0;
+        font-size: 0.75rem;
+        line-height: 1;
+        text-align: center;
+        overflow-wrap: anywhere;
+        cursor: pointer;
+    }
+    input:checked + label, label:hover {
+        color: white;
+    }
+    input:focus-visible + label {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        span {
+            transition: none;
+        }
+    }
+</style>
