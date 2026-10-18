@@ -39,6 +39,9 @@ const { variant = "default", ...props } = Astro.props;
         background-color: #303030;
         cursor: pointer;
     }
+    [hidden] {
+        display: none;
+    }
     [data-variant="primary"] {
         background-color: rgb(var(--cmpurple));
     }
