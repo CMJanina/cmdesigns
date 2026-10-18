@@ -25,18 +25,19 @@ const selected = Math.max(0, options.findIndex(([key]) => key === value));
 </div>
 
 <script>
-    const initialized = new WeakSet<Element>();
+    let listeners: AbortController | undefined;
 
     function initTabs() {
+        listeners?.abort();
+        listeners = new AbortController();
+        const { signal } = listeners;
         for (const tabs of document.querySelectorAll("[data-cm-tabs]")) {
-            if (initialized.has(tabs)) continue;
-            initialized.add(tabs);
             const inputs = Array.from(tabs.querySelectorAll("input"));
             const thumb = tabs.querySelector("span")!;
             const update = () =>
                 thumb.style.setProperty("--selected", String(inputs.findIndex((input) => input.checked)));
-            tabs.addEventListener("change", update);
-            tabs.closest("form")?.addEventListener("reset", () => requestAnimationFrame(update));
+            tabs.addEventListener("change", update, { signal });
+            tabs.closest("form")?.addEventListener("reset", () => requestAnimationFrame(update), { signal });
             update();
         }
     }
