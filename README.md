@@ -7,10 +7,13 @@ violation.
 
 ## Components
 
-| Name            | Description                                         |
-|-----------------|-----------------------------------------------------|
-| `MinimalLayout` | CSS Reset + HTML Skeleton                           |
-| `BaseLayout`    | `MinimalLayout` + cM Fonts + Dark Mode              |
-| `Footer`        | Copyright &copy; `{start}`-`{end}` `{rightsholder}` |
-| `CMText`        | ⚠️ not for external use (chrissx Media trademark)   |
-| `FGText`        | ⚠️ not for external use (Fux Games trademark)       |
+| Name            | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `MinimalLayout` | CSS Reset + HTML Skeleton                                    |
+| `BaseLayout`    | `MinimalLayout` + cM Fonts + Dark Mode                       |
+| `Footer`        | Copyright &copy; `{start}`-`{end}` `{rightsholder}`          |
+| `Button`        | Buttons and links, with default, primary and danger variants |
+| `Dialog`        | Native dialog with a buttons slot                            |
+| `Tabs`          | Segmented radio selector                                     |
+| `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
+| `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
