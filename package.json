@@ -1,6 +1,6 @@
 {
   "name": "cmdesigns",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "An attempt at putting common chrissx Media design elements into a library.",
   "type": "module",
   "repository": {
