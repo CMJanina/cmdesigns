@@ -15,5 +15,6 @@ violation.
 | `Button`        | Buttons and links, with default, primary and danger variants |
 | `Dialog`        | Native dialog with a buttons slot                            |
 | `Tabs`          | Segmented radio selector                                     |
+| `LinkCard`      | Slotted link card                                            |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
 | `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
