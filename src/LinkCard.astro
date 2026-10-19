@@ -1,16 +1,16 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-export type Props = { gradient?: string; frame?: boolean } & (
+export type Props = { highlightBackground?: string; frame?: boolean } & (
     | ({ href: string } & HTMLAttributes<"a">)
     | ({ href?: undefined } & HTMLAttributes<"div">)
 );
 
-const { href, gradient, frame = true, class: className, style, ...attributes } = Astro.props;
+const { href, highlightBackground, frame = true, class: className, style, ...attributes } = Astro.props;
 const Tag = href === undefined ? "div" : "a";
 const cardStyle = typeof style === "string"
-    ? `${style};--link-card-gradient:${gradient ?? "none"}`
-    : { ...style, "--link-card-gradient": gradient };
+    ? `${style};--link-card-highlight-background:${highlightBackground ?? "none"}`
+    : { ...style, "--link-card-highlight-background": highlightBackground };
 ---
 
 <Tag
@@ -18,8 +18,8 @@ const cardStyle = typeof style === "string"
     {href}
     class:list={["cm-link-card", className]}
     style={cardStyle}
-    data-gradient={gradient ? "" : undefined}
-    data-frame={gradient && frame ? "" : undefined}
+    data-highlight-background={highlightBackground ? "" : undefined}
+    data-frame={highlightBackground && frame ? "" : undefined}
 >
     <div class="content"><slot /></div>
 </Tag>
@@ -41,29 +41,25 @@ const cardStyle = typeof style === "string"
     [hidden] {
         display: none;
     }
-    a:not([data-gradient]):is(:hover, :focus-visible) {
+    a:not([data-highlight-background]):is(:hover, :focus-visible) {
         background: #333333;
-    }
-    a:focus-visible {
-        outline: 2px solid;
-        outline-offset: 3px;
     }
     .content {
         position: relative;
         width: 100%;
         min-width: 0;
     }
-    [data-gradient]::before {
+    [data-highlight-background]::before {
         content: "";
         position: absolute;
         inset: 0;
         border-radius: inherit;
-        background-image: var(--link-card-gradient);
+        background: var(--link-card-highlight-background);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    a[data-gradient]:is(:hover, :focus-visible)::before {
+    a[data-highlight-background]:is(:hover, :focus-visible)::before {
         opacity: 1;
     }
     [data-frame] {
@@ -76,7 +72,7 @@ const cardStyle = typeof style === "string"
         background: rgb(15 15 15 / 0.8);
     }
     @media (prefers-reduced-motion: reduce) {
-        [data-gradient]::before {
+        [data-highlight-background]::before {
             transition: none;
         }
     }
