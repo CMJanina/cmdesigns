@@ -11,8 +11,8 @@ let {
     start,
     end = new Date().getFullYear(),
     rightsholder = "chrissx Media",
-    link,
-    build,
+    link = import.meta.env.CMDESIGNS_BUILD_LINK,
+    build = import.meta.env.CMDESIGNS_BUILD,
 } = Astro.props;
 
 const years = start == end ? start : start + "-" + end;
