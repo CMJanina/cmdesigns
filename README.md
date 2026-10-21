@@ -18,3 +18,18 @@ violation.
 | `LinkCard`      | Slotted link card                                            |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
 | `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
+
+## Build commit
+
+```js
+import { defineConfig } from "astro/config";
+import buildCommit from "cmdesigns/build-commit";
+
+export default defineConfig({
+    integrations: [buildCommit("github:chrissxMedia/example", { build: true })],
+});
+```
+
+Sets `Footer`'s default `link` to the served commit. Optional `build: true` adds
+`<repo> (<branch>) v<version>-<sha7>`, using the site's `package.json` version.
+Props override both defaults; `""` hides either. Requires Git during dev/build.
