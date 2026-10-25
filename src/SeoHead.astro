@@ -38,16 +38,12 @@ const {
 const formattedTitle = site?.titleFormat?.replace("{title}", () => title) ?? title;
 const pageDescription = description ?? site?.description;
 const siteUrl = Astro.site ?? (site?.url ? new URL(site.url) : undefined);
-const canonicalUrl =
-    canonical || siteUrl
-        ? new URL(canonical || Astro.url.pathname, siteUrl ?? Astro.url).href
-        : undefined;
+const resolveUrl = (url: string) =>
+    URL.canParse(url, siteUrl) ? new URL(url, siteUrl).href : undefined;
+const canonicalUrl = resolveUrl(canonical || Astro.url.pathname);
 const imageUrl = (source: ImageMetadata | string | null | undefined) =>
     source
-        ? new URL(
-              typeof source === "string" ? source : source.src,
-              siteUrl ?? Astro.url,
-          ).href
+        ? resolveUrl(typeof source === "string" ? source : source.src)
         : undefined;
 const pageImageUrl = imageUrl(image || site?.logoSource);
 const keywordContent = keywords?.filter(Boolean).join(", ");
