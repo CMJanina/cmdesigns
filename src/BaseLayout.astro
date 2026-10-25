@@ -1,36 +1,19 @@
 ---
 import Favicon from "astro-favicon";
-import MinimalLayout from "./MinimalLayout.astro";
+import MinimalLayout, {
+    type Props as MinimalLayoutProps,
+} from "./MinimalLayout.astro";
 
-export interface Props {
-    title: string;
+export interface Props extends MinimalLayoutProps {
     favicon?: ImageMetadata | string;
-    lang: string;
-    description?: string;
     themecolor?: string;
-    fediverseCreator?: string;
 }
 
-const { title, favicon, lang, description, themecolor, fediverseCreator } =
-    Astro.props;
+const { favicon, themecolor, ...layout } = Astro.props;
 ---
 
-<MinimalLayout {title} {lang}>
-    {
-        description && (
-            <meta name="description" content={description} slot="head" />
-        )
-    }
+<MinimalLayout {...layout}>
     {themecolor && <meta name="theme-color" content={themecolor} slot="head" />}
-    {
-        fediverseCreator && (
-            <meta
-                name="fediverse:creator"
-                content={fediverseCreator}
-                slot="head"
-            />
-        )
-    }
     {favicon && <Favicon src={favicon} slot="head" />}
     <meta name="generator" content={Astro.generator} slot="head" />
     <meta name="darkreader-lock" slot="head" />

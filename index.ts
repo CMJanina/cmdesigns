@@ -1,5 +1,6 @@
 import MinimalLayout from "./src/MinimalLayout.astro";
 import BaseLayout from "./src/BaseLayout.astro";
+import SeoHead from "./src/SeoHead.astro";
 import CMText from "./src/CMText.astro";
 import FGText from "./src/FGText.astro";
 import Footer from "./src/Footer.astro";
@@ -15,6 +16,7 @@ import fgLogoSvg from "./src/assets/fg-logo.svg";
 export {
     MinimalLayout,
     BaseLayout,
+    SeoHead,
     CMText,
     FGText,
     Footer,
