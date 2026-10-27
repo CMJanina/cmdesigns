@@ -3,6 +3,7 @@ import Favicon from "astro-favicon";
 import MinimalLayout, {
     type Props as MinimalLayoutProps,
 } from "./MinimalLayout.astro";
+import baseStyles from "./BaseLayout.css?url";
 
 export interface Props extends MinimalLayoutProps {
     favicon?: ImageMetadata | string;
@@ -18,23 +19,7 @@ const { favicon, themecolor, ...layout } = Astro.props;
     <meta name="generator" content={Astro.generator} slot="head" />
     <meta name="darkreader-lock" slot="head" />
     <link rel="stylesheet" href="https://fonts.chrissx.de/" slot="head" />
-    <style is:inline slot="head">
-        :where(body) {
-            font-family: var(--unifont);
-            color: white;
-            background-color: black;
-            color-scheme: dark;
-        }
-        html {
-            scrollbar-color: #666 #000;
-        }
-        html::-webkit-scrollbar-track {
-            background: #000;
-        }
-        html::-webkit-scrollbar-thumb {
-            background: #666;
-        }
-    </style>
+    <link rel="stylesheet" href={baseStyles} slot="head" />
     <slot name="head" slot="head" />
     <slot />
 </MinimalLayout>
