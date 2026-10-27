@@ -40,7 +40,9 @@ const pageDescription = description ?? site?.description;
 const siteUrl = Astro.site ?? (site?.url ? new URL(site.url) : undefined);
 const resolveUrl = (url: string) =>
     URL.canParse(url, siteUrl) ? new URL(url, siteUrl).href : undefined;
-const canonicalUrl = resolveUrl(canonical || Astro.url.pathname);
+const canonicalUrl = resolveUrl(
+    canonical || new URL(Astro.request.url).pathname,
+);
 const imageUrl = (source: ImageMetadata | string | null | undefined) =>
     source
         ? resolveUrl(typeof source === "string" ? source : source.src)
