@@ -10,7 +10,7 @@ export interface Props extends Omit<HTMLAttributes<"a">, "href" | "name"> {
 const { name, url, fediverseHandle, class: className, ...attributes } = Astro.props;
 ---
 
-<div class="h-card">
+<div class="h-card" hidden={attributes.hidden}>
     <a {...attributes} class:list={["p-name", "u-url", className]} href={url}>{name}</a>
     {
         fediverseHandle && (
