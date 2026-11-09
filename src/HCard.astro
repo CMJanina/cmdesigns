@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export interface Props extends Omit<HTMLAttributes<"a">, "href" | "name"> {
+    name: string;
+    url: string;
+    fediverseHandle?: string;
+}
+
+const { name, url, fediverseHandle, class: className, ...attributes } = Astro.props;
+---
+
+<div class="h-card">
+    <a {...attributes} class:list={["p-name", "u-url", className]} href={url}>{name}</a>
+    {
+        fediverseHandle && (
+            <a class="u-url" href={`acct:${fediverseHandle}`} hidden />
+        )
+    }
+</div>
