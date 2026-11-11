@@ -7,6 +7,7 @@ import Footer from "./src/Footer.astro";
 import Button from "./src/Button.astro";
 import Dialog from "./src/Dialog.astro";
 import Tabs from "./src/Tabs.astro";
+import Card from "./src/Card.astro";
 import LinkCard from "./src/LinkCard.astro";
 import cmLogoPng from "./src/assets/cm-logo.png";
 import cmLogoSvg from "./src/assets/cm-logo.svg";
@@ -23,6 +24,7 @@ export {
     Button,
     Dialog,
     Tabs,
+    Card,
     LinkCard,
     cmLogoPng,
     cmLogoSvg,

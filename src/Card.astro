@@ -1,0 +1,92 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = {
+    background?: string;
+    highlightBackground?: string;
+    frame?: boolean;
+} & (
+    | ({ href: string; as?: never } & HTMLAttributes<"a">)
+    | ({ href?: undefined; as?: "div" } & HTMLAttributes<"div">)
+    | ({ href?: undefined; as: "section" } & HTMLAttributes<"section">)
+);
+
+const {
+    as: element = "div", href, background, highlightBackground,
+    frame = true, class: className, style, ...attributes
+} = Astro.props;
+const Tag = href === undefined ? element : "a";
+const cardStyles = {
+    "--cm-card-background": background ?? "#0f0f0f",
+    "--cm-card-frame-background": background ?? "rgb(15 15 15 / 0.8)",
+    "--link-card-highlight-background": highlightBackground ?? "none",
+};
+const cardStyle = typeof style === "string"
+    ? `${style};${Object.entries(cardStyles).map(([name, value]) => `${name}:${value}`).join(";")}`
+    : { ...style, ...cardStyles };
+---
+
+<Tag
+    {...attributes}
+    {href}
+    class:list={["cm-card", "cm-link-card", className]}
+    style={cardStyle}
+    data-highlight-background={highlightBackground ? "" : undefined}
+    data-frame={highlightBackground && frame ? "" : undefined}
+>
+    <div class="content"><slot /></div>
+</Tag>
+
+<style>
+    .cm-card {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 1rem;
+        border: 1px solid #333333;
+        border-radius: 0.8rem;
+        background: var(--cm-card-background);
+        color: white;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+    }
+    [hidden] {
+        display: none;
+    }
+    a:not([data-highlight-background]):is(:hover, :focus-visible) {
+        background: #333333;
+    }
+    .content {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+    }
+    [data-highlight-background]::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--link-card-highlight-background);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    a[data-highlight-background]:is(:hover, :focus-visible)::before {
+        opacity: 1;
+    }
+    [data-frame] {
+        padding: 0.25rem;
+    }
+    [data-frame] > .content {
+        box-sizing: border-box;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        background: var(--cm-card-frame-background);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        [data-highlight-background]::before {
+            transition: none;
+        }
+    }
+</style>
