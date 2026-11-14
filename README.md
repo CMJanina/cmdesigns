@@ -16,6 +16,7 @@ violation.
 | `Dialog`        | Native dialog with a buttons slot                            |
 | `Tabs`          | Segmented radio selector                                     |
 | `LinkCard`      | Slotted link card                                            |
+| `HCard`         | Microformats profile with an optional Fediverse handle       |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
 | `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
 
