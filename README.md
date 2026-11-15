@@ -16,6 +16,11 @@ violation.
 | `Dialog`        | Native dialog with a buttons slot                            |
 | `Tabs`          | Segmented radio selector                                     |
 | `LinkCard`      | Slotted link card                                            |
+| `Field`         | Labelled input with an optional hint and icon slot           |
+| `Select`        | Styled native select                                         |
+| `ChoiceGroup`   | Radio buttons and checkboxes with pixel marks                |
+| `Toggle`        | Animated square switch                                       |
+| `Range`         | Slider with track height, diamond thumb and scale labels     |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
 | `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
 

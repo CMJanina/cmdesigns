@@ -7,6 +7,11 @@ import Button from "./src/Button.astro";
 import Dialog from "./src/Dialog.astro";
 import Tabs from "./src/Tabs.astro";
 import LinkCard from "./src/LinkCard.astro";
+import Field from "./src/Field.astro";
+import Select from "./src/Select.astro";
+import ChoiceGroup from "./src/ChoiceGroup.astro";
+import Toggle from "./src/Toggle.astro";
+import Range from "./src/Range.astro";
 import cmLogoPng from "./src/assets/cm-logo.png";
 import cmLogoSvg from "./src/assets/cm-logo.svg";
 import fgLogoPng from "./src/assets/fg-logo.png";
@@ -22,6 +27,11 @@ export {
     Dialog,
     Tabs,
     LinkCard,
+    Field,
+    Select,
+    ChoiceGroup,
+    Toggle,
+    Range,
     cmLogoPng,
     cmLogoSvg,
     fgLogoPng,
