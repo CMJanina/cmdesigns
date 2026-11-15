@@ -16,6 +16,7 @@ violation.
 | `Dialog`        | Native dialog with a buttons slot                            |
 | `Tabs`          | Segmented radio selector                                     |
 | `LinkCard`      | Slotted link card                                            |
+| `HCard`         | Microformats profile with an optional Fediverse handle       |
 | `Field`         | Labelled input with an optional hint and icon slot           |
 | `Select`        | Styled native select                                         |
 | `ChoiceGroup`   | Radio buttons and checkboxes with pixel marks                |

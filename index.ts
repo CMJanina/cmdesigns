@@ -1,5 +1,6 @@
 import MinimalLayout from "./src/MinimalLayout.astro";
 import BaseLayout from "./src/BaseLayout.astro";
+import SeoHead from "./src/SeoHead.astro";
 import CMText from "./src/CMText.astro";
 import FGText from "./src/FGText.astro";
 import Footer from "./src/Footer.astro";
@@ -7,6 +8,7 @@ import Button from "./src/Button.astro";
 import Dialog from "./src/Dialog.astro";
 import Tabs from "./src/Tabs.astro";
 import LinkCard from "./src/LinkCard.astro";
+import HCard from "./src/HCard.astro";
 import Field from "./src/Field.astro";
 import Select from "./src/Select.astro";
 import ChoiceGroup from "./src/ChoiceGroup.astro";
@@ -20,6 +22,7 @@ import fgLogoSvg from "./src/assets/fg-logo.svg";
 export {
     MinimalLayout,
     BaseLayout,
+    SeoHead,
     CMText,
     FGText,
     Footer,
@@ -27,6 +30,7 @@ export {
     Dialog,
     Tabs,
     LinkCard,
+    HCard,
     Field,
     Select,
     ChoiceGroup,

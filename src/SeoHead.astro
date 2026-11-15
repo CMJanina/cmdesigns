@@ -1,0 +1,123 @@
+---
+export interface Props {
+    title: string;
+    description?: string | null;
+    fediverseCreator?: string;
+    site?: {
+        name: string;
+        url?: string;
+        logoSource?: ImageMetadata | string;
+        description?: string;
+        titleFormat?: string;
+    };
+    keywords?: string[] | null;
+    image?: ImageMetadata | string | null;
+    canonical?: string | null;
+    type?: "website" | "article";
+    article?: {
+        publishedTime?: string | null;
+        modifiedTime?: string | null;
+        author?: string | string[] | null;
+        tags?: string[] | null;
+    } | null;
+    noindex?: boolean;
+}
+
+const {
+    title,
+    description,
+    fediverseCreator,
+    site,
+    keywords,
+    image,
+    canonical,
+    type = "website",
+    article,
+    noindex = false,
+} = Astro.props;
+const formattedTitle = site?.titleFormat?.replace("{title}", () => title) ?? title;
+const pageDescription = description ?? site?.description;
+const siteUrl = Astro.site ?? (site?.url ? new URL(site.url) : undefined);
+const resolveUrl = (url: string) =>
+    URL.canParse(url, siteUrl) ? new URL(url, siteUrl).href : undefined;
+const canonicalUrl = resolveUrl(
+    canonical || new URL(Astro.request.url).pathname,
+);
+const imageUrl = (source: ImageMetadata | string | null | undefined) =>
+    source
+        ? resolveUrl(typeof source === "string" ? source : source.src)
+        : undefined;
+const pageImageUrl = imageUrl(image || site?.logoSource);
+const keywordContent = keywords?.filter(Boolean).join(", ");
+const authors = Array.isArray(article?.author)
+    ? article.author.filter(Boolean)
+    : article?.author
+      ? [article.author]
+      : [];
+const structuredData =
+    site && siteUrl
+        ? {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: site.name,
+              url: siteUrl.href,
+              logo: imageUrl(site.logoSource),
+              description: site.description || undefined,
+          }
+        : undefined;
+---
+
+<title>{formattedTitle}</title>
+{
+    fediverseCreator && (
+        <meta name="fediverse:creator" content={fediverseCreator} />
+    )
+}
+{noindex && <meta name="robots" content="noindex" />}
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+<meta property="og:type" content={type} />
+<meta property="og:title" content={formattedTitle} />
+{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+{site?.name && <meta property="og:site_name" content={site.name} />}
+{
+    pageDescription && (
+        <>
+            <meta name="description" content={pageDescription} />
+            <meta property="og:description" content={pageDescription} />
+        </>
+    )
+}
+{keywordContent && <meta name="keywords" content={keywordContent} />}
+{pageImageUrl && <meta property="og:image" content={pageImageUrl} />}
+{
+    type === "article" && (
+        <>
+            {article?.publishedTime && (
+                <meta
+                    property="article:published_time"
+                    content={article.publishedTime}
+                />
+            )}
+            {article?.modifiedTime && (
+                <meta
+                    property="article:modified_time"
+                    content={article.modifiedTime}
+                />
+            )}
+            {authors.map((author) => (
+                <meta property="article:author" content={author} />
+            ))}
+            {article?.tags?.filter(Boolean).map((tag) => (
+                <meta property="article:tag" content={tag} />
+            ))}
+        </>
+    )
+}
+{
+    structuredData && (
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(structuredData).replace(/</g, "\\u003c")}
+        />
+    )
+}

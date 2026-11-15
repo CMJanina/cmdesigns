@@ -1,10 +1,9 @@
 ---
-export interface Props {
-    title: string;
-    lang: string;
-}
+import SeoHead, { type Props as SeoProps } from "./SeoHead.astro";
 
-const { title, lang } = Astro.props;
+export type Props = SeoProps & { lang: string };
+
+const { lang, ...seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,7 +12,7 @@ const { title, lang } = Astro.props;
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{title}</title>
+        <SeoHead {...seo} />
         <slot name="head" />
     </head>
     <body>
