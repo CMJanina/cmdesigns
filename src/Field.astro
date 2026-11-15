@@ -11,7 +11,7 @@ const {
     label,
     hint,
     name,
-    id = name,
+    id = `field-${crypto.randomUUID()}`,
     "aria-describedby": describedBy,
     ...input
 } = Astro.props;
