@@ -17,6 +17,7 @@ violation.
 | `Tabs`          | Segmented radio selector                                     |
 | `Card`          | Slotted card with configurable background, section or link   |
 | `LinkCard`      | Compatibility wrapper for `Card`                             |
+| `HCard`         | Microformats profile with an optional Fediverse handle       |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
 | `FGText`        | ⚠️ not for external use (Fux Games trademark)                |
 
