@@ -1,5 +1,9 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+type ElementProps = {
+    [Tag in HTMLTag]: { as: Tag } & HTMLAttributes<Tag>;
+}[HTMLTag];
 
 export type Props = {
     background?: string;
@@ -8,7 +12,7 @@ export type Props = {
 } & (
     | ({ href: string; as?: never } & HTMLAttributes<"a">)
     | ({ href?: undefined; as?: "div" } & HTMLAttributes<"div">)
-    | ({ href?: undefined; as: "section" } & HTMLAttributes<"section">)
+    | ({ href?: undefined } & ElementProps)
 );
 
 const {

@@ -15,7 +15,7 @@ violation.
 | `Button`        | Buttons and links, with default, primary and danger variants |
 | `Dialog`        | Native dialog with a buttons slot                            |
 | `Tabs`          | Segmented radio selector                                     |
-| `Card`          | Slotted card with configurable background, section or link   |
+| `Card`          | Slotted card with configurable background and element        |
 | `LinkCard`      | Compatibility wrapper for `Card`                             |
 | `HCard`         | Microformats profile with an optional Fediverse handle       |
 | `CMText`        | ⚠️ not for external use (chrissx Media trademark)            |
