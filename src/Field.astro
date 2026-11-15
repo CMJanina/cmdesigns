@@ -2,6 +2,7 @@
 import type { HTMLAttributes } from "astro/types";
 
 export type Props = {
+    id: string;
     label: string;
     hint?: string;
     name: string;
@@ -11,7 +12,7 @@ const {
     label,
     hint,
     name,
-    id = `field-${crypto.randomUUID()}`,
+    id,
     "aria-describedby": describedBy,
     ...input
 } = Astro.props;
