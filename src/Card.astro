@@ -33,7 +33,7 @@ const cardStyle = typeof style === "string"
 <Tag
     {...attributes}
     {href}
-    class:list={["cm-card", "cm-link-card", className]}
+    class:list={["cm-link-card", className]}
     style={cardStyle}
     data-highlight-background={highlightBackground ? "" : undefined}
     data-frame={highlightBackground && frame ? "" : undefined}
@@ -42,7 +42,7 @@ const cardStyle = typeof style === "string"
 </Tag>
 
 <style>
-    .cm-card {
+    .cm-link-card {
         position: relative;
         display: flex;
         min-width: 0;
