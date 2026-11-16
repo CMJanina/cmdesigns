@@ -4,11 +4,14 @@ import SeoHead from "./src/SeoHead.astro";
 import CMText from "./src/CMText.astro";
 import FGText from "./src/FGText.astro";
 import Footer from "./src/Footer.astro";
+import Header from "./src/Header.astro";
 import Button from "./src/Button.astro";
 import Dialog from "./src/Dialog.astro";
 import Tabs from "./src/Tabs.astro";
+import Card from "./src/Card.astro";
 import LinkCard from "./src/LinkCard.astro";
 import HCard from "./src/HCard.astro";
+import Accordion from "./src/Accordion.astro";
 import Field from "./src/Field.astro";
 import Select from "./src/Select.astro";
 import ChoiceGroup from "./src/ChoiceGroup.astro";
@@ -26,11 +29,14 @@ export {
     CMText,
     FGText,
     Footer,
+    Header,
     Button,
     Dialog,
     Tabs,
+    Card,
     LinkCard,
     HCard,
+    Accordion,
     Field,
     Select,
     ChoiceGroup,

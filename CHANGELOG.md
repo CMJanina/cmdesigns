@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.14, 2026-11-15
+
+- Add `Card` with configurable backgrounds and HTML elements. Keep `LinkCard` as
+  a compatibility wrapper
+  ([#17](https://github.com/chrissxMedia/cmdesigns/pull/17)).
+- Add `HCard` for microformats profiles with an optional Fediverse handle
+  ([#16](https://github.com/chrissxMedia/cmdesigns/pull/16)).
+
 ## 0.1.13, 2026-10-27
 
 - Add `SeoHead` to both layouts and export it for custom layouts. Supports title

@@ -1,0 +1,94 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = { title: string } & HTMLAttributes<"details">;
+
+const { title, ...attributes } = Astro.props;
+---
+
+<details {...attributes}>
+    <summary>
+        <span>{title}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </summary>
+    <div><slot /></div>
+</details>
+
+<style>
+    details {
+        border-bottom: 1px solid #333;
+        color: inherit;
+        overflow-wrap: anywhere;
+    }
+    [hidden]:not([hidden="until-found" i]) {
+        display: none;
+    }
+    summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1em;
+        padding: 1em;
+        border-radius: 0.5em;
+        font-size: 1.125em;
+        font-weight: bold;
+        list-style: none;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 180ms ease;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary:hover {
+        background: #1a1a1a;
+    }
+    summary:focus-visible {
+        outline: 2px solid rgb(var(--cmpurple));
+        outline-offset: 2px;
+    }
+    svg {
+        width: 1em;
+        height: 1em;
+        flex-shrink: 0;
+        transition: transform 180ms ease;
+    }
+    details[open] > summary svg {
+        transform: rotate(180deg);
+    }
+    div {
+        padding: 0 1em 1em;
+        line-height: 1.55;
+    }
+    div > :global(:first-child) {
+        margin-top: 0;
+    }
+    div > :global(:last-child) {
+        margin-bottom: 0;
+    }
+    @supports (interpolate-size: allow-keywords) and selector(::details-content) {
+        details {
+            interpolate-size: allow-keywords;
+        }
+        details::details-content {
+            height: 0;
+            overflow-x: visible;
+            overflow-y: clip;
+            transition: height 180ms ease, content-visibility 180ms ease allow-discrete;
+        }
+        details[open]::details-content {
+            height: auto;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        summary,
+        svg {
+            transition: none;
+        }
+        details::details-content {
+            transition: none;
+        }
+    }
+</style>
