@@ -8,7 +8,7 @@ const { label, ...input } = Astro.props;
 
 <label>
     <input role="switch" {...input} type="checkbox" />
-    <span class="track" aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
     <span>{label}</span>
 </label>
 
@@ -31,7 +31,7 @@ const { label, ...input } = Astro.props;
         margin: 0;
         opacity: 0;
     }
-    .track {
+    input + span {
         position: relative;
         width: 48px;
         height: 24px;
@@ -40,7 +40,7 @@ const { label, ...input } = Astro.props;
         box-shadow: inset 0 0 0 2px #666;
         transition: background-color 120ms;
     }
-    .track::before {
+    input + span::before {
         content: "";
         position: absolute;
         inset-block-start: 3px;
@@ -50,14 +50,14 @@ const { label, ...input } = Astro.props;
         background: white;
         transition: inset-inline-start 120ms;
     }
-    input:checked + .track {
+    input:checked + span {
         background: rgb(var(--cmpurple));
         box-shadow: inset 0 0 0 2px rgb(var(--cmpurple));
     }
-    input:checked + .track::before {
+    input:checked + span::before {
         inset-inline-start: 27px;
     }
-    input:focus-visible + .track {
+    input:focus-visible + span {
         outline: 2px solid rgb(var(--cmpurple));
         outline-offset: 3px;
     }
@@ -65,7 +65,7 @@ const { label, ...input } = Astro.props;
         opacity: 0.6;
         cursor: not-allowed;
     }
-    input:disabled + .track {
+    input:disabled + span {
         background: #666;
         box-shadow: inset 0 0 0 2px #666;
     }
@@ -74,8 +74,8 @@ const { label, ...input } = Astro.props;
         overflow-wrap: anywhere;
     }
     @media (prefers-reduced-motion: reduce) {
-        .track,
-        .track::before {
+        input + span,
+        input + span::before {
             transition: none;
         }
     }
@@ -86,7 +86,7 @@ const { label, ...input } = Astro.props;
             height: 1em;
             opacity: 1;
         }
-        .track {
+        input + span {
             display: none;
         }
     }

@@ -16,7 +16,7 @@ const { label, name, type = "radio", options, form, ...attributes } = Astro.prop
     <div>
         {options.map(({ label, ...input }) => (
             <label>
-                <input form={form} {...input} {type} {name} />
+                <input {form} {...input} {type} {name} />
                 <span>{label}</span>
             </label>
         ))}

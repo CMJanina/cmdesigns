@@ -39,18 +39,17 @@ const position = (value: number) => maximum > minimum
 ---
 
 <div
-    class="range"
     {dir}
     data-cm-range
     style={{ "--bar-height": `${barHeight}px`, "--thumb-size": `${thumbSize}px` }}
 >
-    <div class="heading">
+    <div>
         <label for={id}>{label}</label>
         <output for={id} aria-hidden="true"></output>
     </div>
     <input {...input} type="range" {name} {id} {min} {max} data-diamond={diamond || undefined} />
     {markers.length > 0 && (
-        <div class:list={["labels", { marked: labels !== undefined }]} aria-hidden="true">
+        <div aria-hidden="true" data-marked={labels !== undefined || undefined}>
             {markers.map((value) => <span style={{ "--label-position": `${position(value)}%` }}>{value}</span>)}
         </div>
     )}
@@ -79,7 +78,7 @@ const position = (value: number) => maximum > minimum
 </script>
 
 <style>
-    .range {
+    [data-cm-range] {
         /* TODO: Check thumb and label contrast when light themes are supported. */
         --fill: rgb(var(--cmpurple));
         --empty: #666;
@@ -87,11 +86,11 @@ const position = (value: number) => maximum > minimum
         margin: 0.55em 0;
         min-width: 0;
     }
-    .range:has(input[hidden]),
+    [data-cm-range]:has(input[hidden]),
     [hidden] {
         display: none;
     }
-    .heading {
+    [data-cm-range] > div:first-child {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -174,7 +173,7 @@ const position = (value: number) => maximum > minimum
         outline-offset: 3px;
         border-radius: 4px;
     }
-    .range:has(input:disabled) {
+    [data-cm-range]:has(input:disabled) {
         --fill: #666;
         --thumb: #999;
     }
@@ -182,7 +181,7 @@ const position = (value: number) => maximum > minimum
         cursor: not-allowed;
         opacity: 0.6;
     }
-    .labels {
+    div[aria-hidden] {
         position: relative;
         min-height: 1.8em;
         margin-inline: calc(var(--thumb-size) / 2);
@@ -190,16 +189,16 @@ const position = (value: number) => maximum > minimum
         font-size: 0.8em;
         color: #999;
     }
-    .labels span {
+    div[aria-hidden] span {
         position: absolute;
         inset-inline-start: var(--label-position, 0%);
         transform: translateX(-50%);
         white-space: nowrap;
     }
-    .labels:dir(rtl) span {
+    div[aria-hidden]:dir(rtl) span {
         transform: translateX(50%);
     }
-    .marked span::before {
+    [data-marked] span::before {
         content: "";
         display: block;
         width: 1px;

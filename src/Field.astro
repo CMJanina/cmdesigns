@@ -21,39 +21,39 @@ const description =
     [describedBy, hint && hintId].filter(Boolean).join(" ") || undefined;
 ---
 
-<div class="field">
+<div>
     <label for={id}>{label}</label>
-    <span class="control">
-        {Astro.slots.has("icon") && <span class="icon" aria-hidden="true"><slot name="icon" /></span>}
+    <span>
+        {Astro.slots.has("icon") && <span aria-hidden="true"><slot name="icon" /></span>}
         <input {...input} {name} {id} aria-describedby={description} />
     </span>
     {hint && <small id={hintId}>{hint}</small>}
 </div>
 
 <style>
-    .field {
+    div {
         margin: 0.55em 0;
     }
-    .field:has(input[hidden]) {
+    div:has(input[hidden]) {
         display: none;
     }
-    .control {
+    div > span {
         display: flex;
         align-items: center;
         position: relative;
         margin-top: 0.3em;
     }
-    .icon {
+    span > span {
         position: absolute;
         inset-inline-start: 0.6em;
         display: flex;
         pointer-events: none;
     }
-    .icon :global(svg) {
+    span > span :global(svg) {
         width: 1em;
         height: 1em;
     }
-    .icon + input {
+    span + input {
         padding-inline-start: 2em;
     }
     input {
